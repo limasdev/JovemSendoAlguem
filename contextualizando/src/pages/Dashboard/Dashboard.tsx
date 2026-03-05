@@ -1,5 +1,5 @@
 import './Dashboard.css';
-import { ArrowUpRight, ArrowDownRight, TrendingUp, Percent, Building } from 'lucide-react';
+import { ArrowDownRight, TrendingUp, Percent, Building } from 'lucide-react';
 
 export function Dashboard() {
     return (
