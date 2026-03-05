@@ -1,23 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&display=swap');
-
-/* ── Variables (mesmas do FluxoCaixa) ── */
-:root {
-  --bg: #09090b;
-  --surface: #111113;
-  --surface-2: #18181b;
-  --surface-3: #1f1f24;
-  --border: rgba(255, 255, 255, 0.07);
-  --border-strong: rgba(255, 255, 255, 0.12);
-  --text: #f4f4f5;
-  --text-muted: rgba(244, 244, 245, 0.45);
-  --text-subtle: rgba(244, 244, 245, 0.65);
-  --accent: #6366f1;
-  --accent-soft: rgba(99, 102, 241, 0.15);
-  --radius: 16px;
-  --radius-sm: 10px;
-  font-family: 'Geist', system-ui, sans-serif;
-}
-
 /* ── Root ── */
 .ly-root {
   display: flex;
@@ -25,6 +5,7 @@
   min-height: 100vh;
   background: var(--bg);
   color: var(--text);
+  transition: background var(--transition), color var(--transition);
 }
 
 /* ── Navbar ── */
@@ -35,42 +16,45 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: 56px;
-  padding: 0 24px;
-  background: rgba(17, 17, 19, 0.85);
+  height: 54px;
+  padding: 0 20px;
+  background: color-mix(in srgb, var(--surface) 85%, transparent);
   border-bottom: 1px solid var(--border-strong);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: blur(20px) saturate(1.4);
+  -webkit-backdrop-filter: blur(20px) saturate(1.4);
+  transition: background var(--transition);
 }
 
 /* ── Logo ── */
 .ly-logo {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 9px;
   text-decoration: none;
   flex-shrink: 0;
 }
 
 .ly-logo-icon {
-  width: 30px;
-  height: 30px;
-  border-radius: 8px;
-  background: var(--accent);
+  width: 28px;
+  height: 28px;
+  border-radius: 7px;
+  background: linear-gradient(135deg, var(--accent) 0%, var(--accent-dim) 100%);
   display: grid;
   place-items: center;
-  font-size: 14px;
-  font-weight: 700;
-  color: #fff;
-  box-shadow: 0 0 12px rgba(99, 102, 241, 0.35);
-  letter-spacing: -0.02em;
+  box-shadow: 0 0 14px var(--accent-soft), 0 1px 3px rgba(0,0,0,.3);
+  flex-shrink: 0;
 }
 
 .ly-logo-text {
-  font-size: 15px;
-  font-weight: 600;
+  font-size: 14.5px;
+  font-weight: 500;
   letter-spacing: -0.02em;
   color: var(--text);
+}
+
+.ly-logo-text strong {
+  font-weight: 700;
+  color: var(--accent);
 }
 
 /* ── Nav ── */
@@ -84,44 +68,39 @@
 .ly-link {
   display: flex;
   align-items: center;
-  gap: 7px;
-  padding: 6px 13px;
+  gap: 6px;
+  padding: 6px 12px;
   border-radius: var(--radius-sm);
-  font-size: 13.5px;
+  font-size: 13px;
   font-weight: 500;
   color: var(--text-subtle);
   text-decoration: none;
-  transition: all 0.18s;
+  transition: all var(--transition);
   border: 1px solid transparent;
 }
 
 .ly-link:hover {
   color: var(--text);
   background: var(--surface-2);
-  border-color: var(--border);
 }
 
 .ly-link.active {
-  color: var(--text);
+  color: var(--accent);
   background: var(--accent-soft);
-  border-color: rgba(99, 102, 241, 0.25);
-}
-
-.ly-link.active svg {
-  color: #a5b4fc;
+  border-color: rgba(34, 197, 94, 0.18);
 }
 
 /* ── Actions ── */
 .ly-actions {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 8px;
 }
 
-.ly-notif-btn {
-  position: relative;
-  width: 34px;
-  height: 34px;
+/* Theme toggle */
+.ly-theme-btn {
+  width: 32px;
+  height: 32px;
   display: grid;
   place-items: center;
   background: var(--surface-2);
@@ -129,24 +108,44 @@
   border-radius: var(--radius-sm);
   color: var(--text-subtle);
   cursor: pointer;
-  transition: all 0.18s;
+  transition: all var(--transition);
+}
+
+.ly-theme-btn:hover {
+  background: var(--accent-soft);
+  border-color: rgba(34, 197, 94, 0.22);
+  color: var(--accent);
+}
+
+/* Notification button */
+.ly-notif-btn {
+  position: relative;
+  width: 32px;
+  height: 32px;
+  display: grid;
+  place-items: center;
+  background: var(--surface-2);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-sm);
+  color: var(--text-subtle);
+  cursor: pointer;
+  transition: all var(--transition);
 }
 
 .ly-notif-btn:hover {
   background: var(--surface-3);
   color: var(--text);
-  border-color: var(--border-strong);
 }
 
 .ly-badge {
   position: absolute;
   top: 4px;
   right: 4px;
-  width: 14px;
-  height: 14px;
-  background: #f87171;
+  width: 13px;
+  height: 13px;
+  background: var(--red);
   color: #fff;
-  font-size: 9px;
+  font-size: 8px;
   font-weight: 700;
   border-radius: 999px;
   display: grid;
@@ -155,38 +154,37 @@
 }
 
 .ly-avatar {
-  width: 32px;
-  height: 32px;
+  width: 30px;
+  height: 30px;
   border-radius: 50%;
-  background: var(--surface-3);
-  border: 1px solid var(--border-strong);
-  color: var(--text-subtle);
+  background: var(--accent-soft);
+  border: 1.5px solid rgba(34, 197, 94, 0.25);
+  color: var(--accent);
   display: grid;
   place-items: center;
-  font-size: 11px;
-  font-weight: 600;
+  font-size: 10px;
+  font-weight: 700;
   cursor: pointer;
-  transition: border-color 0.18s;
-  letter-spacing: 0.02em;
+  letter-spacing: 0.03em;
+  transition: border-color var(--transition);
 }
 
 .ly-avatar:hover {
-  border-color: rgba(99, 102, 241, 0.4);
-  color: var(--text);
+  border-color: var(--accent);
 }
 
 /* ── Main ── */
 .ly-main {
   flex: 1;
-  padding: 32px 24px 64px;
+  padding: 28px 20px 60px;
   overflow-y: auto;
 }
 
 /* ── Mobile ── */
 @media (max-width: 640px) {
-  .ly-navbar { padding: 0 16px; }
+  .ly-navbar  { padding: 0 14px; }
   .ly-logo-text { display: none; }
   .ly-link span { display: none; }
-  .ly-link { padding: 6px 10px; }
-  .ly-main { padding: 20px 12px 48px; }
+  .ly-link { padding: 6px 9px; }
+  .ly-main { padding: 18px 10px 48px; }
 }
