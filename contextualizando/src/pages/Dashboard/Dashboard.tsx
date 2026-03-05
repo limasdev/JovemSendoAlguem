@@ -8,12 +8,21 @@ export function Dashboard() {
                 <h1>Modelo de Gestão Financeira - Painel de Controle</h1>
                 <div className="header-actions">
                     <select className="date-select">
-                        <option>Janeiro - Junho 2024</option>
+                        <option>Janeiro 2025</option>
+                        <option>Fevereiro 2025</option>
+                        <option>Março 2025</option>
+                        <option>Abril 2025</option>
+                        <option>Maio 2025</option>
+                        <option>Junho 2025</option>
+                        <option>Julho 2025</option>
+                        <option>Agosto 2025</option>
+                        <option>Setembro 2025</option>
+                        <option>Outubro 2025</option>
+                        <option>Novembro 2025</option>
+                        <option>Dezembro 2025</option>
                     </select>
                     <div className="period-buttons">
                         <button className="period-btn active">Últimos 30 dias</button>
-                        <button className="period-btn">Este Trimestre</button>
-                        <button className="period-btn">Este Ano</button>
                     </div>
                 </div>
             </header>
@@ -22,31 +31,19 @@ export function Dashboard() {
             <section className="summary-cards">
                 <div className="card">
                     <div className="card-title">Despesa Total</div>
-                    <div className="card-value">R$ 000</div>
-                    <div className="card-indicator negative">
-                        <ArrowDownRight size={16} /> -3% vs. período anterior
-                    </div>
+                    <div className="card-value">R$ 000</div> 
                 </div>
                 <div className="card">
                     <div className="card-title">Lucro Líquido</div>
                     <div className="card-value">R$ 000</div>
-                    <div className="card-indicator positive">
-                        <TrendingUp size={16} /> +4% vs. período anterior
-                    </div>
                 </div>
                 <div className="card">
                     <div className="card-title">Margem de Lucro</div>
                     <div className="card-value"> %</div>
-                    <div className="card-indicator neutral">
-                        <Percent size={16} /> Margem estável
-                    </div>
                 </div>
                 <div className="card">
                     <div className="card-title">Saldo Bancário Atual</div>
                     <div className="card-value">R$ 0</div>
-                    <div className="card-indicator neutral">
-                        <Building size={16} /> Em 3 contas
-                    </div>
                 </div>
             </section>
 
@@ -56,7 +53,7 @@ export function Dashboard() {
                     <h3>Fluxo de Caixa Mensal</h3>
                     <div className="iframe-placeholder">
                         {/* INSERIR IFRAME AQUI */}
-                        <span>[Iframe - Gráfico de Barras]</span>
+                        <span>[Gráfico de Barras]</span>
                     </div>
                 </div>
 
@@ -64,7 +61,7 @@ export function Dashboard() {
                     <h3>Composição de Despesas por Categoria</h3>
                     <div className="iframe-placeholder">
                         {/* INSERIR IFRAME AQUI */}
-                        <span>[Iframe - Gráfico de Pizza]</span>
+                        <span>[Gráfico de Pizza]</span>
                     </div>
                 </div>
 
@@ -72,7 +69,7 @@ export function Dashboard() {
                     <h3>Projeção de Fluxo de Caixa</h3>
                     <div className="iframe-placeholder">
                         {/* INSERIR IFRAME AQUI */}
-                        <span>[Iframe - Gráfico de Linha]</span>
+                        <span>[Gráfico de Linha]</span>
                     </div>
                 </div>
 
@@ -80,7 +77,7 @@ export function Dashboard() {
                     <h3>Contas a Pagar e Receber</h3>
                     <div className="table-placeholder">
                         {/* INSERIR IFRAME DA TABELA AQUI */}
-                        <span>[Iframe - Tabela de Contas]</span>
+                        <span>[Tabela de Contas]</span>
                     </div>
                 </div>
             </section>
