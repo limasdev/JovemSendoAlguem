@@ -43,7 +43,7 @@ export function Dashboard() {
                 </div>
                 <div className="card">
                     <div className="card-title">Saldo Bancário Atual</div>
-                    <div className="card-value">R$ 258.000</div>
+                    <div className="card-value">R$ 0</div>
                     <div className="card-indicator neutral">
                         <Building size={16} /> Em 3 contas
                     </div>
