@@ -16,21 +16,9 @@ export function Layout() {
                         <LayoutDashboard size={18} />
                         Visão Geral
                     </NavLink>
-                    <NavLink to="/relatorios" className={({ isActive }) => (isActive ? 'nav-link active' : 'nav-link')}>
-                        <PieChart size={18} />
-                        Relatórios
-                    </NavLink>
-                    <NavLink to="/orcamento" className={({ isActive }) => (isActive ? 'nav-link active' : 'nav-link')}>
-                        <Wallet size={18} />
-                        Orçamento
-                    </NavLink>
                     <NavLink to="/fluxo-caixa" className={({ isActive }) => (isActive ? 'nav-link active' : 'nav-link')}>
                         <ArrowRightLeft size={18} />
                         Fluxo de Caixa
-                    </NavLink>
-                    <NavLink to="/configuracoes" className={({ isActive }) => (isActive ? 'nav-link active' : 'nav-link')}>
-                        <Settings size={18} />
-                        Configurações
                     </NavLink>
                 </nav>
 
