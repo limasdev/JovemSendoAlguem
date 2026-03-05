@@ -1,7 +1,7 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { Layout } from './components/Layout/Layout';
-import { Dashboard } from './pages/Dashboard/Dashboard';
-import { FluxoCaixa } from './pages/FluxoCaixa/FluxoCaixa';
+import { Layout } from './shared/components/layout';
+import { Dashboard } from './modules/dashboard/pages';
+import { FluxoCaixa } from './modules/fluxo-caixa/pages';
 
 function App() {
   return (

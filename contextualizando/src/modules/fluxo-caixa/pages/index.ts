@@ -1,1 +1,1 @@
-export { FluxoCaixa } from './FluxoCaixaPage';
+export { FluxoCaixa } from './FluxoCaixaPage.tsx';
