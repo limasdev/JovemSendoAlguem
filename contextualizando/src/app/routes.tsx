@@ -5,6 +5,7 @@ import { FluxoCaixa } from '../modules/fluxo-caixa/pages';
 
 export function AppRoutes() {
   return (
+    
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Layout />}>
