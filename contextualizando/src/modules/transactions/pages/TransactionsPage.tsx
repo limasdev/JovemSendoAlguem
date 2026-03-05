@@ -4,8 +4,8 @@ import {
   CATEGORY_ICONS,
   PAYMENT_METHODS,
   STATUS_CONFIG,
-  ENTRADA_CATEGORIES,
-  SAIDA_CATEGORIES,
+  /* ENTRADA_CATEGORIES,
+  SAIDA_CATEGORIES,*/
   formatBRL,
   formatDateBR,
 } from "../../fluxo-caixa/constants";
