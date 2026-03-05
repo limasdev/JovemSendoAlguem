@@ -111,8 +111,8 @@ export function FluxoCaixa() {
           <div className={`fx-step ${step >= 1 ? "active" : ""}`}>
             <div className="fx-step-dot">{step > 1 ? "✓" : "1"}</div>
             <div className="fx-step-meta">
-              <span className="fx-step-title">Renda</span>
-              <span className="fx-step-desc">Quanto você ganha</span>
+              <span className="fx-step-title">Declaração de renda</span>
+              <span className="fx-step-desc">Declare sua renda mensal.</span>
             </div>
           </div>
 
@@ -121,8 +121,8 @@ export function FluxoCaixa() {
           <div className={`fx-step ${step >= 2 ? "active" : ""}`}>
             <div className="fx-step-dot">{step > 2 ? "✓" : "2"}</div>
             <div className="fx-step-meta">
-              <span className="fx-step-title">Gastos</span>
-              <span className="fx-step-desc">Cadastre as despesas</span>
+              <span className="fx-step-title">Declaração de gastos</span>
+              <span className="fx-step-desc">Cadastre suas despesas do mês</span>
             </div>
           </div>
 
@@ -163,7 +163,7 @@ export function FluxoCaixa() {
                       onChange={(ev) => setIncome(Number(ev.target.value || 0))}
                     />
                     <span className="fx-help">
-                      Dica: você pode incluir apenas sua renda fixa.
+                      Dica: você pode incluir apenas sua renda  <a href="https://sambaporno.com">fixa.</a>
                     </span>
                   </div>
 
@@ -171,7 +171,7 @@ export function FluxoCaixa() {
                     <div className="fx-panel-row">
                       <span className="fx-panel-label">Status</span>
                       <span className={`fx-badge ${incomeValid ? "ok" : "warn"}`}>
-                        {incomeValid ? "Renda informada" : "Informe um valor > 0"}
+                        {incomeValid ? "Renda informada" : "Informe um valor válido"}
                       </span>
                     </div>
                     <div className="fx-panel-row">
@@ -381,7 +381,7 @@ export function FluxoCaixa() {
                   </div>
 
                   {expenses.length === 0 ? (
-                    <div className="fx-empty">Sem gastos cadastrados.</div>
+                    <div className="fx-empty"> <a href="https://trollerworld.neocities.org/">Nenhum gasto até agora parabéns</a></div> 
                   ) : (
                     <ul className="fx-items">
                       {expenses.map((ex) => (
