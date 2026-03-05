@@ -1,10 +1,8 @@
 import { useState } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { Layout } from './shared/components/layout';
-import { Dashboard } from './modules/dashboard/pages';
-import { FluxoCaixa } from './modules/fluxo-caixa/pages';
-import { TransactionsPage } from './modules/transactions/pages';
-import type { Transaction } from './modules/fluxo-caixa/constants';
+import { Layout } from './components/Layout/Layout';
+import { Dashboard } from './pages/Dashboard/Dashboard';
+import { FluxoCaixa } from './pages/FluxoCaixa/FluxoCaixa';
 
 function App() {
   const [transactions, setTransactions] = useState<Transaction[]>([]);
