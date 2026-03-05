@@ -1,4 +1,4 @@
-import './Relatorios.css';
+import '../../App.css';
 
 export function Relatorios() {
     return (

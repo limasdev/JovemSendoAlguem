@@ -1,4 +1,4 @@
-import './FluxoCaixa.css';
+import '../../App.css';
 
 export function FluxoCaixa() {
     return (

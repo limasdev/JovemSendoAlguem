@@ -1,4 +1,4 @@
-import './Configuracoes.css';
+import '../../App.css';
 
 export function Configuracoes() {
     return (

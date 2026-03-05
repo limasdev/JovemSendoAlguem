@@ -1,4 +1,4 @@
-import './Orcamento.css';
+import '../../App.css';
 
 export function Orcamento() {
     return (

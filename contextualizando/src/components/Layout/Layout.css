@@ -13,11 +13,11 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background-color: #1a365d; /* Dark blue from the image */
+  background-color: #1a365d;
   height: 60px;
   padding: 0 24px;
   color: #fff;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .logo-section {
@@ -66,13 +66,13 @@
 }
 
 .nav-link:hover {
-  background-color: rgba(255,255,255,0.05);
+  background-color: rgba(255, 255, 255, 0.05);
   color: #fff;
 }
 
 .nav-link.active {
   color: #fff;
-  background-color: rgba(255,255,255,0.1);
+  background-color: rgba(255, 255, 255, 0.1);
   border-bottom-color: #3182ce;
 }
 
