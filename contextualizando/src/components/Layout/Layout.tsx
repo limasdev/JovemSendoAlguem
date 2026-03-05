@@ -1,5 +1,5 @@
 import { Outlet, NavLink } from 'react-router-dom';
-import { LayoutDashboard, PieChart, Wallet, ArrowRightLeft, Settings, Bell } from 'lucide-react';
+import { LayoutDashboard, ArrowRightLeft, Bell } from 'lucide-react';
 import './Layout.css';
 
 export function Layout() {
