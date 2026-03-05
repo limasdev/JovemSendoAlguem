@@ -8,7 +8,7 @@ export function Layout() {
             <header className="ly-navbar">
                 <div className="ly-logo">
                     <div className="ly-logo-icon">C</div>
-                    <span className="ly-logo-text">Context</span>
+                    <span className="ly-logo-text">Shopping</span>
                 </div>
 
                 <nav className="ly-nav">

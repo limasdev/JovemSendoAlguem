@@ -17,7 +17,7 @@ export function Dashboard() {
                             'Maio', 'Junho', 'Julho', 'Agosto',
                             'Setembro', 'Outubro', 'Novembro', 'Dezembro',
                         ].map((m) => (
-                            <option key={m}>{m} 2025</option>
+                            <option key={m}>{m} 2026</option>
                         ))}
                     </select>
                     <button className="db-pill-btn active" type="button">Últimos 30 dias</button>
@@ -76,27 +76,7 @@ export function Dashboard() {
                         <p className="db-placeholder-text">Gráfico de Pizza</p>
                         <p className="db-placeholder-hint">Insira o iframe aqui</p>
                     </div>
-                </div>
-
-                <div className="db-chart-card db-span-2">
-                    <div className="db-chart-head">
-                        <h3 className="db-chart-title">Projeção de Fluxo de Caixa</h3>
-                        <span className="db-chart-tag">Linha</span>
-                    </div>
-                    <div className="db-chart-body">
-                        <div className="db-placeholder-icon">
-                            <svg width="36" height="36" viewBox="0 0 36 36" fill="none">
-                                <polyline points="3,28 10,18 17,22 24,10 33,14"
-                                    stroke="currentColor" strokeWidth="2.5"
-                                    strokeLinecap="round" strokeLinejoin="round"
-                                    fill="none" opacity="0.5"/>
-                            </svg>
-                        </div>
-                        <p className="db-placeholder-text">Gráfico de Linha</p>
-                        <p className="db-placeholder-hint">Insira o iframe do gráfico aqui</p>
-                    </div>
-                </div>
-
+                </div>  
                 <div className="db-chart-card">
                     <div className="db-chart-head">
                         <h3 className="db-chart-title">Contas a Pagar e Receber</h3>
