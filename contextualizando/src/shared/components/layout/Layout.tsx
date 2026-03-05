@@ -5,7 +5,8 @@ import './Layout.css';
 
 export function Layout() {
     const [theme, setTheme] = useState<'dark' | 'light'>(() => {
-        return (localStorage.getItem('theme') as 'dark' | 'light') ?? 'light';
+        const saved = localStorage.getItem('theme');
+        return saved === 'dark' || saved === 'light' ? saved : 'light';
     });
     const [menuOpen, setMenuOpen] = useState(false);
 

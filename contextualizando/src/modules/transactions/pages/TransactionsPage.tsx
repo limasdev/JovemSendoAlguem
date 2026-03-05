@@ -1,29 +1,31 @@
-import { useState, useMemo } from "react";
-import type { Transaction } from "../../fluxo-caixa/constants";
+import { useEffect, useMemo, useState } from "react";
+import type { Transaction } from "../../../shared/types";
 import {
   CATEGORY_ICONS,
   PAYMENT_METHODS,
-  STATUS_CONFIG,
-  /* ENTRADA_CATEGORIES,
-  SAIDA_CATEGORIES,*/
   formatBRL,
   formatDateBR,
-} from "../../fluxo-caixa/constants";
+  STATUS_CONFIG,
+} from "../../../shared/types";
 import { Search, Filter, X, ArrowLeftRight } from "lucide-react";
 import "./TransactionsPage.css";
 
 interface TransactionsPageProps {
   transactions: Transaction[];
   onRemoveTransaction: (id: string) => void;
+  loading?: boolean;
+  error?: string | null;
 }
 
-export function TransactionsPage({ transactions, onRemoveTransaction }: TransactionsPageProps) {
+export function TransactionsPage({ transactions, onRemoveTransaction, loading, error }: TransactionsPageProps) {
   // Search and filter states
   const [searchTerm, setSearchTerm] = useState("");
   const [typeFilter, setTypeFilter] = useState<"todos" | "entrada" | "saida">("todos");
   const [categoryFilter, setCategoryFilter] = useState<string>("todas");
   const [statusFilter, setStatusFilter] = useState<string>("todos");
   const [showFilters, setShowFilters] = useState(false);
+  const [page, setPage] = useState(1);
+  const pageSize = 10;
 
   // Get unique categories from transactions
   const availableCategories = useMemo(() => {
@@ -53,6 +55,34 @@ export function TransactionsPage({ transactions, onRemoveTransaction }: Transact
       return matchesSearch && matchesType && matchesCategory && matchesStatus;
     });
   }, [transactions, searchTerm, typeFilter, categoryFilter, statusFilter]);
+
+  const sortedTransactions = useMemo(() => {
+    return [...filteredTransactions].sort((a, b) => {
+      const da = a.date || "";
+      const db = b.date || "";
+      if (da === db) return 0;
+      return da > db ? -1 : 1;
+    });
+  }, [filteredTransactions]);
+
+  const totalItems = sortedTransactions.length;
+  const totalPages = Math.max(1, Math.ceil(totalItems / pageSize));
+
+  useEffect(() => {
+    setPage(1);
+  }, [searchTerm, typeFilter, categoryFilter, statusFilter]);
+
+  useEffect(() => {
+    if (page > totalPages) setPage(totalPages);
+  }, [page, totalPages]);
+
+  const pagedTransactions = useMemo(() => {
+    const start = (page - 1) * pageSize;
+    return sortedTransactions.slice(start, start + pageSize);
+  }, [sortedTransactions, page]);
+
+  // const pageStart = totalItems === 0 ? 0 : (page - 1) * pageSize + 1;
+  // const pageEnd = totalItems === 0 ? 0 : Math.min(page * pageSize, totalItems);
 
   // Calculate totals based on filtered transactions
   const totalEntradas = filteredTransactions
@@ -93,6 +123,46 @@ export function TransactionsPage({ transactions, onRemoveTransaction }: Transact
             <h1 className="tx-title">Transações</h1>
           </div>
         </header>
+
+        {/* Resumo Cards */}
+        <div className="tx-resumo-grid">
+          <div className="tx-resumo-card pos">
+            <div className="tx-resumo-icon">
+              <ArrowLeftRight size={20} />
+            </div>
+            <div className="tx-resumo-content">
+              <span className="tx-resumo-label">Total Entradas</span>
+              <strong className="tx-resumo-val">{formatBRL(totalEntradas)}</strong>
+            </div>
+          </div>
+          <div className="tx-resumo-card neg">
+            <div className="tx-resumo-icon">
+              <ArrowLeftRight size={20} />
+            </div>
+            <div className="tx-resumo-content">
+              <span className="tx-resumo-label">Total Saídas</span>
+              <strong className="tx-resumo-val">{formatBRL(totalSaidas)}</strong>
+            </div>
+          </div>
+          <div className={`tx-resumo-card ${balance < 0 ? "neg" : "pos"}`}>
+            <div className="tx-resumo-icon">
+              <ArrowLeftRight size={20} />
+            </div>
+            <div className="tx-resumo-content">
+              <span className="tx-resumo-label">Saldo</span>
+              <strong className="tx-resumo-val">{formatBRL(balance)}</strong>
+            </div>
+          </div>
+          <div className="tx-resumo-card neutral">
+            <div className="tx-resumo-content">
+              <span className="tx-resumo-label">Quantidade</span>
+              <strong className="tx-resumo-val">{totalItems}</strong>
+              {totalItems !== transactions.length && (
+                <span className="tx-resumo-total">de {transactions.length}</span>
+              )}
+            </div>
+          </div>
+        </div>
 
         {/* Search and Filter Bar */}
         <div className="tx-search-card">
@@ -184,45 +254,17 @@ export function TransactionsPage({ transactions, onRemoveTransaction }: Transact
           )}
         </div>
 
-        {/* Resumo Cards */}
-        <div className="tx-resumo-grid">
-          <div className="tx-resumo-card pos">
-            <div className="tx-resumo-icon">
-              <ArrowLeftRight size={20} />
-            </div>
-            <div className="tx-resumo-content">
-              <span className="tx-resumo-label">Total Entradas</span>
-              <strong className="tx-resumo-val">{formatBRL(totalEntradas)}</strong>
-            </div>
+        {loading && (
+          <div className="tx-card" style={{ padding: 16, marginBottom: 16 }}>
+            Carregando transações da planilha...
           </div>
-          <div className="tx-resumo-card neg">
-            <div className="tx-resumo-icon">
-              <ArrowLeftRight size={20} />
-            </div>
-            <div className="tx-resumo-content">
-              <span className="tx-resumo-label">Total Saídas</span>
-              <strong className="tx-resumo-val">{formatBRL(totalSaidas)}</strong>
-            </div>
+        )}
+
+        {error && !loading && (
+          <div className="tx-card" style={{ padding: 16, marginBottom: 16, border: '1px solid rgba(248, 113, 113, 0.35)' }}>
+            Erro ao carregar planilha: {error}
           </div>
-          <div className={`tx-resumo-card ${balance < 0 ? "neg" : "pos"}`}>
-            <div className="tx-resumo-icon">
-              <ArrowLeftRight size={20} />
-            </div>
-            <div className="tx-resumo-content">
-              <span className="tx-resumo-label">Saldo</span>
-              <strong className="tx-resumo-val">{formatBRL(balance)}</strong>
-            </div>
-          </div>
-          <div className="tx-resumo-card neutral">
-            <div className="tx-resumo-content">
-              <span className="tx-resumo-label">Quantidade</span>
-              <strong className="tx-resumo-val">{filteredTransactions.length}</strong>
-              {filteredTransactions.length !== transactions.length && (
-                <span className="tx-resumo-total">de {transactions.length}</span>
-              )}
-            </div>
-          </div>
-        </div>
+        )}
 
         {/* Tabela de Transações */}
         <div className="tx-card">
@@ -231,15 +273,15 @@ export function TransactionsPage({ transactions, onRemoveTransaction }: Transact
             <div className="tx-header-actions">
               {hasActiveFilters && (
                 <span className="tx-filter-info">
-                  {filteredTransactions.length} de {transactions.length} resultados
+                  {totalItems} de {transactions.length} resultados
                 </span>
               )}
-              <span className="tx-chip neutral">{filteredTransactions.length} item{filteredTransactions.length !== 1 ? "s" : ""}</span>
+              <span className="tx-chip neutral">{totalItems} item{totalItems !== 1 ? "s" : ""}</span>
             </div>
           </div>
-          {filteredTransactions.length === 0 ? (
+          {totalItems === 0 ? (
             <div className="tx-empty-state">
-              <div className="tx-empty-icon">📊</div>
+              <div className="tx-empty-icon" />
               <p>
                 {hasActiveFilters
                   ? "Nenhuma transação encontrada com os filtros aplicados."
@@ -258,6 +300,32 @@ export function TransactionsPage({ transactions, onRemoveTransaction }: Transact
             </div>
           ) : (
             <div className="tx-table-container">
+              <div className="tx-pagination">
+                <button
+                  type="button"
+                  aria-label="Página anterior"
+                  disabled={page <= 1}
+                  onClick={() => setPage((p) => Math.max(1, p - 1))}
+                  className="tx-pagination-btn"
+                >
+                  ‹
+                </button>
+
+                <span className="tx-pagination-info">
+                  Página {page} de {totalPages}
+                </span>
+
+                <button
+                  type="button"
+                  aria-label="Próxima página"
+                  disabled={page >= totalPages}
+                  onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
+                  className="tx-pagination-btn"
+                >
+                  ›
+                </button>
+              </div>
+
               <table className="tx-table">
                 <thead>
                   <tr>
@@ -272,7 +340,7 @@ export function TransactionsPage({ transactions, onRemoveTransaction }: Transact
                   </tr>
                 </thead>
                 <tbody>
-                  {filteredTransactions.map((t) => (
+                  {pagedTransactions.map((t) => (
                     <tr key={t.id} className={t.type === "entrada" ? "row-entrada" : "row-saida"}>
                       <td>{formatDateBR(t.date)}</td>
                       <td>
@@ -314,6 +382,7 @@ export function TransactionsPage({ transactions, onRemoveTransaction }: Transact
                   ))}
                 </tbody>
               </table>
+
             </div>
           )}
         </div>

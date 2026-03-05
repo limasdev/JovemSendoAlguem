@@ -10,8 +10,7 @@
 
 /* ── Navbar ── */
 .ly-navbar {
-  position: sticky;
-  top: 0;
+  position: relative;
   z-index: 100;
   display: flex;
   align-items: center;
@@ -30,8 +29,7 @@
   width: 100%;
   max-width: 1200px;
   gap: 20px;
-  padding-top: 500px;
-  padding-bottom: 500px;
+  padding: 0 20px;
 }
 
 /* ── Logo ── */
@@ -242,6 +240,11 @@
 
 /* ── Mobile ── */
 @media (max-width: 768px) {
+  .ly-navbar {
+    position: sticky;
+    top: 0;
+  }
+
   .ly-navbar  { padding: 0 20px; height: 60px; }
   .ly-logo-text { display: none; }
   

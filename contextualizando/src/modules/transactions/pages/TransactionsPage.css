@@ -212,6 +212,56 @@
   border-color: var(--accent);
 }
 
+/* Pagination (above table) */
+.tx-pagination {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px 12px;
+  margin-bottom: 6px;
+}
+
+.tx-pagination-info {
+  flex: 1;
+  text-align: center;
+  font-size: 12px;
+  color: var(--text-muted);
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+.tx-pagination-btn {
+  width: 40px;
+  height: 40px;
+  border-radius: 999px;
+  border: 1px solid var(--border-strong);
+  background: color-mix(in srgb, var(--surface) 85%, transparent);
+  color: var(--text);
+  cursor: pointer;
+  box-shadow: var(--shadow-sm);
+  display: grid;
+  place-items: center;
+  font-size: 18px;
+  line-height: 1;
+  transition: transform 0.2s ease, background 0.2s ease, border-color 0.2s ease, opacity 0.2s ease;
+}
+
+.tx-pagination-btn:hover:not(:disabled) {
+  transform: translateY(-1px);
+  background: var(--surface-2);
+  border-color: var(--accent);
+}
+
+.tx-pagination-btn:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.tx-pagination-btn:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
 .tx-clear-filters-btn {
   display: flex;
   align-items: center;
@@ -262,7 +312,12 @@
   align-items: center;
   gap: 16px;
   transition: all 0.2s ease;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.04), 0 4px 20px rgba(0,0,0,0.03);
+  box-shadow: var(--shadow);
+}
+
+.tx-resumo-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.08);
 }
 
 .tx-resumo-card.pos {

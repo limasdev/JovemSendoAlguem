@@ -212,6 +212,378 @@
   border-radius: 999px;
 }
 
+/* ── Chip ── */
+.db-chip {
+  padding: 6px 12px;
+  border-radius: var(--radius-sm);
+  background: var(--surface-2);
+  border: 1px solid var(--border-strong);
+  color: var(--text-muted);
+  font-size: 12px;
+  font-weight: 500;
+}
+
+/* ── Table ── */
+.db-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+.db-table thead {
+  background: var(--surface-3);
+  border-bottom: 1px solid var(--border);
+}
+
+.db-table th {
+  padding: 10px 12px;
+  text-align: left;
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--text-subtle);
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+}
+
+.db-table td {
+  padding: 10px 12px;
+  border-bottom: 1px solid var(--border);
+  color: var(--text);
+}
+
+.db-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.db-table tbody tr:hover {
+  background: var(--surface-3);
+}
+
+.db-table .pos {
+  color: var(--green);
+}
+
+.db-table .neg {
+  color: var(--red);
+}
+
+.db-table .entrada {
+  color: var(--green);
+}
+
+.db-table .saida {
+  color: var(--red);
+}
+
+/* ── Empty State ── */
+.db-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+  color: var(--text-muted);
+}
+
+.db-empty p {
+  margin: 0;
+  font-size: 14px;
+}
+
+/* ── Progress Bars ── */
+.db-bars {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 16px;
+}
+
+.db-bar-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.db-bar-label {
+  font-size: 12px;
+  color: var(--text-subtle);
+  min-width: 100px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.db-bar-track {
+  flex: 1;
+  height: 8px;
+  background: var(--surface-3);
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.db-bar-fill {
+  height: 100%;
+  background: var(--accent);
+  border-radius: 999px;
+  transition: width 0.3s ease;
+}
+
+.db-bar-value {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text);
+  min-width: 80px;
+  text-align: right;
+  font-family: var(--mono);
+}
+
+/* ── Status List ── */
+.db-status-list {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 16px;
+}
+
+.db-status-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 12px;
+  border-radius: var(--radius-sm);
+  background: var(--surface-2);
+}
+
+.db-status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+.db-status-item.recebido .db-status-dot {
+  background: var(--green);
+}
+
+.db-status-item.pago .db-status-dot {
+  background: var(--green);
+}
+
+.db-status-item.pendente .db-status-dot {
+  background: var(--amber);
+}
+
+.db-status-item.agendado .db-status-dot {
+  background: var(--accent);
+}
+
+.db-status-label {
+  flex: 1;
+  font-size: 13px;
+  color: var(--text);
+}
+
+.db-status-count {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text);
+  font-family: var(--mono);
+}
+
+/* ── KPI Card Variants ── */
+.db-kpi-card.pos {
+  border-left: 3px solid var(--green);
+}
+
+.db-kpi-card.neg {
+  border-left: 3px solid var(--red);
+}
+
+.db-kpi-card.warning {
+  border-left: 3px solid var(--amber);
+}
+
+.db-kpi-card.info {
+  border-left: 3px solid var(--accent);
+}
+
+.db-kpi-sub {
+  font-size: 11px;
+  color: var(--text-muted);
+  margin-top: 4px;
+  display: block;
+}
+
+/* ── Quick Stat ── */
+.db-quick-stat {
+  margin: 16px 0 8px;
+}
+
+.db-quick-stat-content {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 14px 20px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.db-quick-label {
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+.db-quick-value {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text);
+  background: var(--surface-2);
+  padding: 4px 10px;
+  border-radius: 6px;
+}
+
+.db-quick-amount {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--red);
+  margin-left: auto;
+  font-family: var(--mono);
+}
+
+.db-chart-actions {
+  display: flex;
+  gap: 6px;
+}
+
+.db-mini-btn {
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
+  border: 1px solid var(--border-strong);
+  background: var(--surface-2);
+  color: var(--text-muted);
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+  transition: all 0.2s ease;
+}
+
+.db-mini-btn:hover {
+  background: var(--surface-3);
+  color: var(--text);
+  border-color: var(--accent);
+}
+
+.db-mini-btn.active {
+  background: var(--accent-soft);
+  color: var(--accent);
+  border-color: var(--accent);
+}
+
+/* Pie Chart Styles */
+.db-pie-chart {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.db-pie-container {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.db-pie-svg {
+  width: 120px;
+  height: 120px;
+  transform: rotate(-90deg);
+  flex-shrink: 0;
+}
+
+.db-pie-legend {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 140px;
+}
+
+.db-pie-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: var(--text);
+}
+
+.db-pie-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+.db-monthly-chart {
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-end;
+  height: 100%;
+  padding: 20px 10px;
+  gap: 8px;
+}
+
+.db-monthly-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  flex: 1;
+  min-width: 60px;
+}
+
+.db-monthly-label {
+  font-size: 11px;
+  color: var(--text-muted);
+  text-transform: uppercase;
+}
+
+.db-monthly-bars {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  height: 80px;
+}
+
+.db-monthly-bar-group {
+  display: flex;
+  gap: 4px;
+  align-items: flex-end;
+}
+
+.db-monthly-bar {
+  width: 14px;
+  border-radius: 3px 3px 0 0;
+  transition: all 0.2s ease;
+}
+
+.db-monthly-bar.entrada {
+  background: var(--green);
+}
+
+.db-monthly-bar.saida {
+  background: var(--red);
+}
+
+.db-monthly-saldo {
+  font-size: 12px;
+  font-weight: 600;
+  font-family: var(--mono);
+}
+
 /* ── Responsive ── */
 @media (max-width: 900px) {
   .db-kpis   { grid-template-columns: repeat(2, 1fr); }

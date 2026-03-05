@@ -1,11 +1,11 @@
 import { useState } from "react";
-import type { Transaction } from "../constants";
+import type { Transaction } from "../../../shared/types";
 import {
+  todayISO,
   ENTRADA_CATEGORIES,
   SAIDA_CATEGORIES,
   PAYMENT_METHODS,
-  todayISO,
-} from "../constants";
+} from "../../../shared/types";
 import "./FluxoCaixaPage.css";
 
 // Função para formatar valor em moeda brasileira em tempo real

@@ -4,7 +4,7 @@ import { Layout } from './shared/components/layout';
 import { Dashboard } from './modules/dashboard/pages';
 import { FluxoCaixa } from './modules/fluxo-caixa/pages';
 import { TransactionsPage } from './modules/transactions/pages';
-import type { Transaction } from './modules/fluxo-caixa/constants';
+import type { Transaction } from './shared/types';
 
 function App() {
   const [transactions, setTransactions] = useState<Transaction[]>([]);
@@ -21,7 +21,7 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Layout />}>
-          <Route index element={<Dashboard />} />
+          <Route index element={<Dashboard transactions={transactions} />} />
           <Route 
             path="fluxo-caixa" 
             element={<FluxoCaixa transactions={transactions} onAddTransaction={addTransaction} onRemoveTransaction={removeTransaction} />} 
