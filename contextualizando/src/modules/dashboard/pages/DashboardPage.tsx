@@ -1,4 +1,4 @@
-import './Dashboard.css';
+import './DashboardPage.css';
 
 export function Dashboard() {
     return (
@@ -7,7 +7,7 @@ export function Dashboard() {
             <header className="db-header">
                 <div className="db-header-left">
                     <p className="db-eyebrow">Gestão Financeira</p>
-                    <h1 className="db-title">Painel de Controle</h1>
+                    <h1 className="db-title">DASHBOARD</h1>
                 </div>
 
                 <div className="db-header-right">
@@ -30,7 +30,7 @@ export function Dashboard() {
                     { label: 'Renda do mês',       value: 'R$ —',  sub: null },
                     { label: 'Total de Gastos',        value: 'R$ —',  sub: null },
                     { label: 'Taxa de Economia',      value: '%',   sub: null },
-                    { label: 'Saldo Bancário Atual', value: 'R$ —',  sub: "nul" }, /* % da renda que foi poupada (ex: "Você guardou 23% da sua renda") — muito mais motivador pra PF do que margem de lucro */
+                    { label: 'Saldo Bancário Atual', value: 'R$ —',  sub: "nul" },
                 ].map(({ label, value }) => (
                     <div key={label} className="db-kpi-card">
                         <span className="db-kpi-label">{label}</span>

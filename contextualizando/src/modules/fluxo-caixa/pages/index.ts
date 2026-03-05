@@ -1,0 +1,1 @@
+export { FluxoCaixa } from './FluxoCaixaPage';
