@@ -1,6 +1,6 @@
 import { useMemo, useState } from "react";
 import "../../App.css";
-import "./fluxocaixa.css";
+import "./FluxoCaixa.css";
 
 type Expense = {
   id: string;
