@@ -27,10 +27,10 @@ export function Dashboard() {
             {/* KPI Cards */}
             <section className="db-kpis">
                 {[
-                    { label: 'Despesa Total',       value: 'R$ —',  sub: null },
-                    { label: 'Lucro Líquido',        value: 'R$ —',  sub: null },
-                    { label: 'Margem de Lucro',      value: '— %',   sub: null },
-                    { label: 'Saldo Bancário Atual', value: 'R$ —',  sub: null },
+                    { label: 'Renda do mês',       value: 'R$ —',  sub: null },
+                    { label: 'Total de Gastos',        value: 'R$ —',  sub: null },
+                    { label: 'Taxa de Economia',      value: '%',   sub: null },
+                    { label: 'Saldo Bancário Atual', value: 'R$ —',  sub: "nul" }, /* % da renda que foi poupada (ex: "Você guardou 23% da sua renda") — muito mais motivador pra PF do que margem de lucro */
                 ].map(({ label, value }) => (
                     <div key={label} className="db-kpi-card">
                         <span className="db-kpi-label">{label}</span>
