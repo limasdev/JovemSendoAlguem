@@ -1,21 +1,45 @@
-import { useMemo, useState } from "react";
-import type {
-  Transaction,
-} from "../constants";
+import { useState } from "react";
+import type { Transaction } from "../constants";
 import {
-  CATEGORY_ICONS,
   ENTRADA_CATEGORIES,
   SAIDA_CATEGORIES,
   PAYMENT_METHODS,
-  STATUS_CONFIG,
-  formatBRL,
   todayISO,
-  formatDateBR,
 } from "../constants";
 import "./FluxoCaixaPage.css";
 
-export function FluxoCaixa() {
-  const [transactions, setTransactions] = useState<Transaction[]>([]);
+// Função para formatar valor em moeda brasileira em tempo real
+function formatCurrencyInput(value: string): string {
+  // Remove tudo que não for número
+  const numericValue = value.replace(/\D/g, "");
+  
+  // Converte para número (em centavos)
+  const numberValue = parseInt(numericValue, 10);
+  
+  if (isNaN(numberValue)) return "";
+  
+  // Formata como moeda brasileira
+  return new Intl.NumberFormat("pt-BR", {
+    style: "currency",
+    currency: "BRL",
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2,
+  }).format(numberValue / 100);
+}
+
+// Função para converter valor formatado de volta para número
+function parseCurrencyValue(formattedValue: string): number {
+  const cleanValue = formattedValue.replace(/[^\d,]/g, "").replace(",", ".");
+  return parseFloat(cleanValue) || 0;
+}
+
+interface FluxoCaixaProps {
+  transactions: Transaction[];
+  onAddTransaction: (transaction: Transaction) => void;
+  onRemoveTransaction: (id: string) => void;
+}
+
+export function FluxoCaixa({ transactions, onAddTransaction, onRemoveTransaction }: FluxoCaixaProps) {
 
   // Form states
   const [description, setDescription] = useState("");
@@ -26,18 +50,8 @@ export function FluxoCaixa() {
   const [paymentMethod, setPaymentMethod] = useState<string>("Banco");
   const [status, setStatus] = useState<"recebido" | "pendente" | "agendado" | "pago">("pago");
 
-  const totalEntradas = useMemo(() =>
-    transactions.filter(t => t.type === "entrada").reduce((acc, t) => acc + t.amount, 0),
-    [transactions]
-  );
-  const totalSaidas = useMemo(() =>
-    transactions.filter(t => t.type === "saida").reduce((acc, t) => acc + t.amount, 0),
-    [transactions]
-  );
-  const balance = useMemo(() => totalEntradas - totalSaidas, [totalEntradas, totalSaidas]);
-
-  const parsedAmount = Number(String(amount).replace(",", "."));
-  const transactionValid = description.trim().length > 0 && Number.isFinite(parsedAmount) && parsedAmount > 0;
+  const parsedAmount = parseCurrencyValue(amount);
+  const transactionValid = description.trim().length > 0 && parsedAmount > 0;
 
   // Atualizar categoria quando mudar o tipo
   const handleTypeChange = (newType: "entrada" | "saida") => {
@@ -55,28 +69,21 @@ export function FluxoCaixa() {
     e.preventDefault();
     if (!transactionValid) return;
 
-    setTransactions((prev) => [
-      {
-        id: crypto.randomUUID(),
-        description: description.trim(),
-        category,
-        amount: parsedAmount,
-        date,
-        type,
-        paymentMethod,
-        status
-      },
-      ...prev,
-    ]);
+    onAddTransaction({
+      id: crypto.randomUUID(),
+      description: description.trim(),
+      category,
+      amount: parsedAmount,
+      date,
+      type,
+      paymentMethod,
+      status
+    });
 
     // Reset form mantendo o tipo atual
     setDescription("");
     setAmount("");
     setDate(todayISO());
-  }
-
-  function removeTransaction(id: string) {
-    setTransactions((prev) => prev.filter((t) => t.id !== id));
   }
 
   const currentCategories = type === "entrada" ? ENTRADA_CATEGORIES : SAIDA_CATEGORIES;
@@ -162,15 +169,14 @@ export function FluxoCaixa() {
                 <div className="fx-field">
                   <label className="fx-label" htmlFor="amt">Valor (R$)</label>
                   <div className="fx-input-group">
-                    <span className="fx-input-prefix">R$</span>
                     <input
                       id="amt"
-                      className="fx-input"
+                      className="fx-input fx-input-currency"
                       type="text"
                       inputMode="decimal"
-                      placeholder="0,00"
+                      placeholder="R$ 0,00"
                       value={amount}
-                      onChange={(ev) => setAmount(ev.target.value)}
+                      onChange={(ev) => setAmount(formatCurrencyInput(ev.target.value))}
                     />
                   </div>
                 </div>
@@ -231,110 +237,13 @@ export function FluxoCaixa() {
                   <button
                     type="button"
                     className="fx-btn fx-btn-ghost"
-                    onClick={() => setTransactions([])}
+                    onClick={() => transactions.forEach(t => onRemoveTransaction(t.id))}
                   >
                     Limpar tudo
                   </button>
                 )}
               </div>
             </form>
-          </div>
-
-          {/* Card 2: Resumo */}
-          <div className="fx-card fx-card-resumo">
-            <div className="fx-card-header">
-              <h2 className="fx-card-title">Resumo</h2>
-              <span className="fx-chip neutral">{transactions.length} item{transactions.length !== 1 ? "s" : ""}</span>
-            </div>
-            <div className="fx-resumo-grid">
-              <div className="fx-resumo-card pos">
-                <span className="fx-resumo-label">Total Entradas</span>
-                <strong className="fx-resumo-val">{formatBRL(totalEntradas)}</strong>
-              </div>
-              <div className="fx-resumo-card neg">
-                <span className="fx-resumo-label">Total Saídas</span>
-                <strong className="fx-resumo-val">{formatBRL(totalSaidas)}</strong>
-              </div>
-              <div className={`fx-resumo-card ${balance < 0 ? "neg" : "pos"} full-width`}>
-                <span className="fx-resumo-label">Saldo</span>
-                <strong className="fx-resumo-val">{formatBRL(balance)}</strong>
-              </div>
-            </div>
-          </div>
-
-          {/* Card 3: Histórico */}
-          <div className="fx-card fx-card-historico">
-            <div className="fx-card-header">
-              <h2 className="fx-card-title">Histórico de Transações</h2>
-            </div>
-            {transactions.length === 0 ? (
-              <div className="fx-empty-state">
-                <div className="fx-empty-icon">📊</div>
-                <p>Nenhuma transação cadastrada ainda.</p>
-                <p style={{ fontSize: "0.875rem", color: "var(--text-muted)", marginTop: "0.5rem" }}>
-                  Adicione entradas e saídas para visualizar seu fluxo de caixa.
-                </p>
-              </div>
-            ) : (
-              <div className="fx-table-container">
-                <table className="fx-table">
-                  <thead>
-                    <tr>
-                      <th>Data</th>
-                      <th>Descrição</th>
-                      <th>Categoria</th>
-                      <th>Tipo</th>
-                      <th>Valor</th>
-                      <th>Conta/Pagamento</th>
-                      <th>Status</th>
-                      <th></th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {transactions.map((t) => (
-                      <tr key={t.id} className={t.type === "entrada" ? "row-entrada" : "row-saida"}>
-                        <td>{formatDateBR(t.date)}</td>
-                        <td>
-                          <div className="fx-table-desc">
-                            <span className="fx-table-icon">{CATEGORY_ICONS[t.category]}</span>
-                            {t.description}
-                          </div>
-                        </td>
-                        <td>{t.category}</td>
-                        <td>
-                          <span className={`fx-type-badge ${t.type}`}>
-                            {t.type === "entrada" ? "Entrada" : "Saída"}
-                          </span>
-                        </td>
-                        <td className={`fx-table-value ${t.type}`}>
-                          {t.type === "entrada" ? "+" : "-"} {formatBRL(t.amount)}
-                        </td>
-                        <td>
-                          <span className="fx-payment-badge">
-                            {PAYMENT_METHODS[t.paymentMethod]} {t.paymentMethod}
-                          </span>
-                        </td>
-                        <td>
-                          <span className={`fx-status-badge ${STATUS_CONFIG[t.status].colorClass}`}>
-                            {STATUS_CONFIG[t.status].label}
-                          </span>
-                        </td>
-                        <td>
-                          <button
-                            className="fx-remove-btn"
-                            onClick={() => removeTransaction(t.id)}
-                            type="button"
-                            aria-label="Remover"
-                          >
-                            ×
-                          </button>
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
-            )}
           </div>
         </div>
       </div>

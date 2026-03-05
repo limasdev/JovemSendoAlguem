@@ -1,1 +1,1 @@
-export { Dashboard } from './DashboardPage';
+export { Dashboard } from './DashboardPage.tsx';
