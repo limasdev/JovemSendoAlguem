@@ -21,29 +21,22 @@ export function Dashboard() {
             {/* Summary Cards */}
             <section className="summary-cards">
                 <div className="card">
-                    <div className="card-title">Receita Total</div>
-                    <div className="card-value">R$ 745.000</div>
-                    <div className="card-indicator positive">
-                        <ArrowUpRight size={16} /> +12% vs. período anterior
-                    </div>
-                </div>
-                <div className="card">
                     <div className="card-title">Despesa Total</div>
-                    <div className="card-value">R$ 412.000</div>
+                    <div className="card-value">R$ 000</div>
                     <div className="card-indicator negative">
                         <ArrowDownRight size={16} /> -3% vs. período anterior
                     </div>
                 </div>
                 <div className="card">
                     <div className="card-title">Lucro Líquido</div>
-                    <div className="card-value">R$ 333.000</div>
+                    <div className="card-value">R$ 000</div>
                     <div className="card-indicator positive">
                         <TrendingUp size={16} /> +4% vs. período anterior
                     </div>
                 </div>
                 <div className="card">
                     <div className="card-title">Margem de Lucro</div>
-                    <div className="card-value">44,7%</div>
+                    <div className="card-value"> %</div>
                     <div className="card-indicator neutral">
                         <Percent size={16} /> Margem estável
                     </div>
