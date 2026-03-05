@@ -1,138 +1,192 @@
-/* Layout Container */
-.layout-container {
+@import url('https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&display=swap');
+
+/* ── Variables (mesmas do FluxoCaixa) ── */
+:root {
+  --bg: #09090b;
+  --surface: #111113;
+  --surface-2: #18181b;
+  --surface-3: #1f1f24;
+  --border: rgba(255, 255, 255, 0.07);
+  --border-strong: rgba(255, 255, 255, 0.12);
+  --text: #f4f4f5;
+  --text-muted: rgba(244, 244, 245, 0.45);
+  --text-subtle: rgba(244, 244, 245, 0.65);
+  --accent: #6366f1;
+  --accent-soft: rgba(99, 102, 241, 0.15);
+  --radius: 16px;
+  --radius-sm: 10px;
+  font-family: 'Geist', system-ui, sans-serif;
+}
+
+/* ── Root ── */
+.ly-root {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  background-color: #f4f7f6;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  color: #333;
+  background: var(--bg);
+  color: var(--text);
 }
 
-/* Top Navbar */
-.top-navbar {
+/* ── Navbar ── */
+.ly-navbar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background-color: #1a365d;
-  height: 60px;
+  height: 56px;
   padding: 0 24px;
-  color: #fff;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  background: rgba(17, 17, 19, 0.85);
+  border-bottom: 1px solid var(--border-strong);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
 }
 
-.logo-section {
+/* ── Logo ── */
+.ly-logo {
   display: flex;
   align-items: center;
-  gap: 12px;
-}
-
-.logo-icon {
-  width: 32px;
-  height: 32px;
-  background-color: #3182ce;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: bold;
-  font-size: 1.2rem;
-}
-
-.logo-text {
-  font-size: 1.1rem;
-  font-weight: 600;
-  letter-spacing: 0.5px;
-}
-
-/* Navigation Links */
-.main-nav {
-  display: flex;
-  align-items: center;
-  height: 100%;
-}
-
-.nav-link {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  color: #e2e8f0;
+  gap: 10px;
   text-decoration: none;
-  padding: 0 16px;
+  flex-shrink: 0;
+}
+
+.ly-logo-icon {
+  width: 30px;
+  height: 30px;
+  border-radius: 8px;
+  background: var(--accent);
+  display: grid;
+  place-items: center;
+  font-size: 14px;
+  font-weight: 700;
+  color: #fff;
+  box-shadow: 0 0 12px rgba(99, 102, 241, 0.35);
+  letter-spacing: -0.02em;
+}
+
+.ly-logo-text {
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: var(--text);
+}
+
+/* ── Nav ── */
+.ly-nav {
+  display: flex;
+  align-items: center;
+  gap: 2px;
   height: 100%;
-  font-size: 0.9rem;
+}
+
+.ly-link {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 6px 13px;
+  border-radius: var(--radius-sm);
+  font-size: 13.5px;
   font-weight: 500;
-  transition: all 0.2s ease;
-  border-bottom: 3px solid transparent;
+  color: var(--text-subtle);
+  text-decoration: none;
+  transition: all 0.18s;
+  border: 1px solid transparent;
 }
 
-.nav-link:hover {
-  background-color: rgba(255, 255, 255, 0.05);
-  color: #fff;
+.ly-link:hover {
+  color: var(--text);
+  background: var(--surface-2);
+  border-color: var(--border);
 }
 
-.nav-link.active {
-  color: #fff;
-  background-color: rgba(255, 255, 255, 0.1);
-  border-bottom-color: #3182ce;
+.ly-link.active {
+  color: var(--text);
+  background: var(--accent-soft);
+  border-color: rgba(99, 102, 241, 0.25);
 }
 
-/* User Section */
-.user-section {
+.ly-link.active svg {
+  color: #a5b4fc;
+}
+
+/* ── Actions ── */
+.ly-actions {
   display: flex;
   align-items: center;
-  gap: 16px;
+  gap: 10px;
 }
 
-.notification-btn {
-  background: transparent;
-  border: none;
-  color: #fff;
-  cursor: pointer;
+.ly-notif-btn {
   position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 4px;
-}
-
-.notification-btn .badge {
-  position: absolute;
-  top: 0;
-  right: 0;
-  background-color: #e53e3e;
-  color: #fff;
-  font-size: 0.65rem;
-  font-weight: bold;
-  width: 16px;
-  height: 16px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.user-profile {
-  display: flex;
-  align-items: center;
+  width: 34px;
+  height: 34px;
+  display: grid;
+  place-items: center;
+  background: var(--surface-2);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-sm);
+  color: var(--text-subtle);
   cursor: pointer;
+  transition: all 0.18s;
 }
 
-.avatar {
+.ly-notif-btn:hover {
+  background: var(--surface-3);
+  color: var(--text);
+  border-color: var(--border-strong);
+}
+
+.ly-badge {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  width: 14px;
+  height: 14px;
+  background: #f87171;
+  color: #fff;
+  font-size: 9px;
+  font-weight: 700;
+  border-radius: 999px;
+  display: grid;
+  place-items: center;
+  border: 1.5px solid var(--bg);
+}
+
+.ly-avatar {
   width: 32px;
   height: 32px;
-  background-color: #e2e8f0;
-  color: #1a365d;
   border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: bold;
-  font-size: 0.85rem;
+  background: var(--surface-3);
+  border: 1px solid var(--border-strong);
+  color: var(--text-subtle);
+  display: grid;
+  place-items: center;
+  font-size: 11px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: border-color 0.18s;
+  letter-spacing: 0.02em;
 }
 
-/* Main Content Area */
-.main-content {
+.ly-avatar:hover {
+  border-color: rgba(99, 102, 241, 0.4);
+  color: var(--text);
+}
+
+/* ── Main ── */
+.ly-main {
   flex: 1;
-  padding: 24px;
+  padding: 32px 24px 64px;
   overflow-y: auto;
+}
+
+/* ── Mobile ── */
+@media (max-width: 640px) {
+  .ly-navbar { padding: 0 16px; }
+  .ly-logo-text { display: none; }
+  .ly-link span { display: none; }
+  .ly-link { padding: 6px 10px; }
+  .ly-main { padding: 20px 12px 48px; }
 }

@@ -4,36 +4,34 @@ import './Layout.css';
 
 export function Layout() {
     return (
-        <div className="layout-container">
-            <header className="top-navbar">
-                <div className="logo-section">
-                    <div className="logo-icon">C</div>
-                    <span className="logo-text">Context</span>
+        <div className="ly-root">
+            <header className="ly-navbar">
+                <div className="ly-logo">
+                    <div className="ly-logo-icon">C</div>
+                    <span className="ly-logo-text">Context</span>
                 </div>
 
-                <nav className="main-nav">
-                    <NavLink to="/" end className={({ isActive }) => (isActive ? 'nav-link active' : 'nav-link')}>
-                        <LayoutDashboard size={18} />
+                <nav className="ly-nav">
+                    <NavLink to="/" end className={({ isActive }) => `ly-link${isActive ? ' active' : ''}`}>
+                        <LayoutDashboard size={16} />
                         Visão Geral
                     </NavLink>
-                    <NavLink to="/fluxo-caixa" className={({ isActive }) => (isActive ? 'nav-link active' : 'nav-link')}>
-                        <ArrowRightLeft size={18} />
+                    <NavLink to="/fluxo-caixa" className={({ isActive }) => `ly-link${isActive ? ' active' : ''}`}>
+                        <ArrowRightLeft size={16} />
                         Fluxo de Caixa
                     </NavLink>
                 </nav>
 
-                <div className="user-section">
-                    <button className="notification-btn">
-                        <Bell size={20} />
-                        <span className="badge">3</span>
+                <div className="ly-actions">
+                    <button className="ly-notif-btn" type="button" aria-label="Notificações">
+                        <Bell size={18} />
+                        <span className="ly-badge">3</span>
                     </button>
-                    <div className="user-profile">
-                        <div className="avatar">JD</div>
-                    </div>
+                    <div className="ly-avatar">JD</div>
                 </div>
             </header>
 
-            <main className="main-content">
+            <main className="ly-main">
                 <Outlet />
             </main>
         </div>
